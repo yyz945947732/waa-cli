@@ -5,10 +5,20 @@ const base = require('./webpack.base.conf')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = merge(base, {
     mode: 'production',
     devtool: 'cheap-source-map',
+    optimization: {
+        minimizer: [
+            new TerserPlugin({
+                cache: true,
+                parallel: true,
+                sourceMap: true
+            })
+        ]
+    },
     plugins: [
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': '"production"'
@@ -23,8 +33,6 @@ module.exports = merge(base, {
             to: 'static',
             ignore: ['.*']
         }]),
-        new ExtractTextPlugin({
-            filename:'css/[name].[contenthash].css'
-        })
+        new ExtractTextPlugin('index.css')
     ]
 })

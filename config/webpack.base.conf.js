@@ -43,7 +43,7 @@ const config = {
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: path.resolve(__dirname, '../index.html'),
-            inject: true,
+            inject: 'body',
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,

@@ -10,6 +10,7 @@ function cssLoaders(types) {
             })
         }
     })
+
     return loaders
 }
 
