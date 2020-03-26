@@ -29,7 +29,7 @@ module.exports = merge(base, {
         [file]
         `),
         new CopyWebpackPlugin([{
-            from: path.resolve(__dirname, '../static'),
+            from: path.resolve(__dirname, '../src/static'),
             to: 'static',
             ignore: ['.*']
         }]),

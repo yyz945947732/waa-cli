@@ -6,7 +6,8 @@ function cssLoaders(types) {
             test: new RegExp('\\.' + item + '$'),
             use: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
-                use: ['css-loader', item + '-loader']
+                use: ['css-loader', item + '-loader'],
+                publicPath:'css'
             })
         }
     })
