@@ -1,7 +1,5 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const cssLoaders = require('./cssLoaders')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const config = {
     entry: path.resolve(__dirname, '../src/index.js'),
@@ -22,23 +20,26 @@ const config = {
                 include: path.resolve(__dirname, '../src')
             },
             {
-                test: /\.(svg|png|jpe?g|gif|woff2?|eot|ttf|otf)$/i,
+                test: /\.(svg|png|jpe?g|gif)$/i,
                 use: {
                     loader: 'url-loader',
                     query: {
-                        limit: 10000
+                        limit: 10000,
+                        name: 'img/[name].waa.[hash:6].[ext]'
                     }
                 }
             },
             {
-                test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: 'css-loader',
-                    publicPath:'css'
-                })
+                test: /\.(woff2?|eot|ttf|otf)$/i,
+                use: {
+                    loader: 'url-loader',
+                    query: {
+                        limit: 10000,
+                        name: 'fonts/[name].waa.[hash:3].[ext]'
+                    }
+                }
             }
-        ].concat(cssLoaders(['less', 'sass', 'stylus']))
+        ]
     },
     plugins: [
         new HtmlWebpackPlugin({

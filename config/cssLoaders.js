@@ -1,13 +1,12 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-function cssLoaders(types) {
+function prodCssLoaders(types) {
     const loaders = types.map(function (item) {
         return {
             test: new RegExp('\\.' + item + '$'),
             use: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
-                use: ['css-loader', item + '-loader'],
-                publicPath:'css'
+                use: ['css-loader', item + '-loader']
             })
         }
     })
@@ -15,4 +14,14 @@ function cssLoaders(types) {
     return loaders
 }
 
-module.exports = cssLoaders
+function devCssLoaders(types) {
+    const loaders = types.map(function (item) {
+        return {
+            test: new RegExp('\\.' + item + '$'),
+            use: ['style-loader', 'css-loader', item + '-loader']
+        }
+    })
+    return loaders
+}
+
+module.exports = { prodCssLoaders, devCssLoaders }
