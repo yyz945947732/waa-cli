@@ -50,6 +50,13 @@ const config = {
             name: 'fonts/[name].waa.[hash:6].[ext]'
           }
         }
+      },
+      {
+        test: /\.pug$/,
+        use: {
+          loader: 'pug-loader'
+        },
+        include: path.resolve(__dirname, '../src')
       }
     ]
   },

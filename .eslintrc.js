@@ -7,11 +7,16 @@ module.exports = {
     },
     env: {
         browser: true,
-        node:true,
+        node: true,
         es6: true
     },
     plugins: [
         'html'
     ],
     extends: 'standard',
+    rules: {
+        'semi': 0,
+        'eol-last': 0
+    }
+
 }
