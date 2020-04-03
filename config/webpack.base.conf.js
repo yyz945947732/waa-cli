@@ -1,11 +1,16 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const NpmInstallPlugin = require('npm-install-webpack-plugin')
 
 const config = {
   entry: path.resolve(__dirname, '../src/index.js'),
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: 'bundle.[hash:3].js'
+  },
+  externals: {
+    jquery: 'jQuery',
+    lodash: 'lodash'
   },
   module: {
     rules: [
@@ -78,6 +83,11 @@ const config = {
         minifyURLs: true
       },
       path: './static'
+    }),
+    new NpmInstallPlugin({
+      peerDependencies: true,
+      quiet: false,
+      npm: 'cnpm'
     })
   ]
 }

@@ -8,6 +8,9 @@ module.exports = merge(base, {
   mode: 'development',
   devtool: 'cheap-eval-source-map',
   cache: true,
+  performance: {
+    hints: 'error'
+  },
   devServer: {
     contentBase: path.resolve(__dirname, '../src'),
     port: '1314',

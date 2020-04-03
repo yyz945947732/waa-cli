@@ -16,7 +16,8 @@ module.exports = {
     extends: 'standard',
     rules: {
         'semi': 0,
-        'eol-last': 0
+        'eol-last': 0,
+        'no-undef': 0
     }
 
 }

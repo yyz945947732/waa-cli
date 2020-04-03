@@ -7,6 +7,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
+const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = merge(base, {
   mode: 'production',
@@ -45,6 +46,13 @@ module.exports = merge(base, {
       to: 'static',
       ignore: ['.*']
     }]),
-    new ExtractTextPlugin('css/index.css')
+    new ExtractTextPlugin('css/index.css'),
+    new UglifyJsWebpackPlugin(),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jquery: 'jquery',
+      lodash: 'lodash',
+      _: 'lodash'
+    })
   ]
 })
