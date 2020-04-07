@@ -1,16 +1,27 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const NpmInstallPlugin = require('npm-install-webpack-plugin')
 
 const config = {
   entry: path.resolve(__dirname, '../src/index.js'),
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: 'bundle.[hash:3].js'
+    filename: 'bundle.[hash:3].js',
+    chunkFilename: '[name][hash:4].bundle.js'
   },
   externals: {
     jquery: 'jQuery',
     lodash: 'lodash'
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, '../'),
+      src: path.resolve(__dirname, '../src')
+    }
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
   },
   module: {
     rules: [
@@ -62,14 +73,30 @@ const config = {
           loader: 'pug-loader'
         },
         include: path.resolve(__dirname, '../src')
+      },
+      {
+        test: /\.html$/,
+        use: {
+          loader: 'html-loader',
+          options: {
+            minimize: true,
+            removeComments: false,
+            collapseWhitespace: false
+          }
+        }
+      },
+      {
+        test: /\.ejs$/,
+        use: ['ejs-loader']
       }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: path.resolve(__dirname, '../index.html'),
+      template: path.resolve(__dirname, '../index.ejs'),
       inject: 'body',
+      title: 'waa-cli',
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -83,11 +110,6 @@ const config = {
         minifyURLs: true
       },
       path: './static'
-    }),
-    new NpmInstallPlugin({
-      peerDependencies: true,
-      quiet: false,
-      npm: 'cnpm'
     })
   ]
 }
