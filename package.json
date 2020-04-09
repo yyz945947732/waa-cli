@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --inline --config config/webpack.dev.conf.js",
     "dev": "webpack-dev-server --inline --config config/webpack.dev.conf.js",
-    "build": "webpack --config config/webpack.prod.conf.js"
+    "build": "webpack --config config/webpack.prod.conf.js",
+    "report": "webpack-bundle-analyzer --port 8123 dist/stats.json"
   },
   "repository": {
     "type": "git",
@@ -45,6 +46,7 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "fibers": "^4.0.2",
     "file-loader": "^6.0.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.0.1",
     "less": "^3.11.1",
@@ -62,6 +64,7 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^4.0.0",
     "webpack": "^4.42.1",
+    "webpack-bundle-analyzer": "^3.6.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
     "webpack-merge": "^4.2.2"

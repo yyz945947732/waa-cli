@@ -8,6 +8,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 module.exports = merge(base, {
   mode: 'production',
@@ -53,6 +54,10 @@ module.exports = merge(base, {
       jquery: 'jquery',
       lodash: 'lodash',
       _: 'lodash'
+    }),
+    new BundleAnalyzerPlugin({
+      generateStatsFile: true,
+      analyzerMode: 'disabled'
     })
   ]
 })

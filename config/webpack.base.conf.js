@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const FriendlyErrorWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 const config = {
   entry: path.resolve(__dirname, '../src/index.js'),
@@ -21,6 +22,14 @@ const config = {
   optimization: {
     splitChunks: {
       chunks: 'all'
+    }
+  },
+  performance: {
+    hints: false,
+    maxAssetSize: 3000000,
+    maxEntrypointSize: 5000000,
+    assetFilter: function (assetFilename) {
+      return assetFilename.endsWith('.js');
     }
   },
   module: {
@@ -110,7 +119,8 @@ const config = {
         minifyURLs: true
       },
       path: './static'
-    })
+    }),
+    new FriendlyErrorWebpackPlugin()
   ]
 }
 
